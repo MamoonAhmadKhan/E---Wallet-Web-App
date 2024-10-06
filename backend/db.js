@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+const mongoose =  require("mongoose");
 
-const mongoose = require("mongodb+srv://khanmamoon887:Mamoon%401122@mamoon.uhuzg.mongodb.net/paytm");
+mongoose.connect("mongodb+srv://khanmamoon887:Mamoon%401122@mamoon.uhuzg.mongodb.net/paytm");
 
 const userSchema = new mongoose.Schema({
     username: {

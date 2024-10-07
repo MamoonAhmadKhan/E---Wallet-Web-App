@@ -3,7 +3,7 @@ const zod = require("zod");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = require("./config");
-const { User } = require("../db");
+const { User, Account } = require("../db");
 const { authMiddleware } = require("../middleware");
 
 const signupSchema = zod.object({

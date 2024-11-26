@@ -114,7 +114,7 @@ router.put("/", authMiddleware, async function (req, res) {
 router.get("/bulk", async function (req, res) {
     const filter = req.query.filter || "";
 
-    const users = await user.find({
+    const users = await User.find({
         $or: [{
             firstName: {
                 "$regex": filter                
@@ -135,5 +135,35 @@ router.get("/bulk", async function (req, res) {
         }))
     });
 });
+
+// Add this route to get the current authenticated user's data
+router.get("/getCurrentUser", authMiddleware, async function (req, res) {
+    try {
+        // Fetch the user data using the userId from the token
+        const user = await User.findById(req.userId);
+
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found"
+            });
+        }
+
+        // Return the current user's data
+        res.status(200).json({
+            currentUser: {
+                username: user.username,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                _id: user._id
+            }
+        });
+    } catch (error) {
+        console.error("Error fetching current user:", error.message);
+        res.status(500).json({
+            message: "Server error while fetching user data"
+        });
+    }
+});
+
 
 module.exports = router;

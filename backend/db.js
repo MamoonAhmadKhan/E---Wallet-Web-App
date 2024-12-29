@@ -1,6 +1,6 @@
 const mongoose =  require("mongoose");
 
-mongoose.connect("mongodb+srv://khanmamoon887:Mamoon%401122@mamoon.uhuzg.mongodb.net/paytm");
+mongoose.connect("mongodburl");
 
 const userSchema = new mongoose.Schema({
     username: {
